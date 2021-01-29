@@ -4,17 +4,15 @@
 {% block content %}
 
 
-<h1>TOP TEN</h1>
+<h1>TOP TEN CUSTOMERS</h1>
 
-<h3>{{customers}}</h3>
-
-    <h2>Top Ten Customers By Reservation Number</h2>
+    <h3>By Reservation Number</h3>
     {% if customers %}
-    <ul>
+    <ol>
       {% for customer in customers %}
-      <li><b>{{customer}}</li>
+      <li>{{customer.fullName}} -- {{customer.reservations}}</li>
       {% endfor %}
-    </ul>
+    </ol>
     {% else %}
     <p>None!</p>
     {% endif %}

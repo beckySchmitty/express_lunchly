@@ -20,6 +20,11 @@ router.get("/", async function(req, res, next) {
 router.get("/topten", async function(req, res, next) {
   try {
     const customers = await Customer.getTopTen();
+
+    for (let i =0; i< customers.length;i++ ){
+      customers[i].reservations = await customers[i].getReservations();
+    }
+
     return res.render("customer_topTen.html", { customers });
   } catch (err) {
     return next(err);

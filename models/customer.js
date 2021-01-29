@@ -10,6 +10,7 @@ class Customer {
     this.lastName = lastName;
     this.phone = phone;
     this.notes = notes;
+    this.reservations;
   }
 
 // find all customers
@@ -45,16 +46,25 @@ class Customer {
       err.status = 404;
       throw err;
     }
-
     return new Customer(customer);
   }
 
 // return top ten customers based on most reservations 
   static async getTopTen() {
     const resp = await db.query(
-          `SELECT customer_id, COUNT(*) FROM reservations GROUP BY customer_id ORDER BY COUNT(*) DESC LIMIT 10;`);
-
-    return resp.rows.map(c => Customer.get(c.id))
+          `SELECT customer_id, COUNT(*) 
+          FROM reservations 
+          GROUP BY customer_id 
+          ORDER BY COUNT(*) DESC LIMIT 10;`);
+    const resArr = [];
+    // finding customer objects from id to add to resArr
+    for (let i=0; i < resp.rows.length; i++) {
+      let customer = await Customer.get(resp.rows[i].customer_id);
+      customer.reservations = await Reservation.getReservationsForCustomer(customer.customer_id);
+      debugger;
+      resArr.push(customer);
+    }
+    return resArr;
   }
 
 
