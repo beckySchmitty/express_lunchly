@@ -57,3 +57,8 @@ class Reservation {
 
 
 module.exports = Reservation;
+
+
+
+// SELECT id, customer_id AS "customerId", num_guests AS "numGuests", start_at AS "startAt", notes AS "notes", COUNT(*) FROM reservations GROUP BY c
+// ustomer_id;

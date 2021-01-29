@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}{{customer.fullName}}{% endblock %}
+
+{% block content %}
+
+
+<h1>TOP TEN</h1>
+
+<h3>{{customers}}</h3>
+
+    <h2>Top Ten Customers By Reservation Number</h2>
+    {% if customers %}
+    <ul>
+      {% for customer in customers %}
+      <li><b>{{customer}}</li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <p>None!</p>
+    {% endif %}
+
+
+
+
+{% endblock %}

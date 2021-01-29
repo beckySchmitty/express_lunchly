@@ -16,6 +16,16 @@ router.get("/", async function(req, res, next) {
   }
 });
 
+// displays top 10 customers ordered by most reservations
+router.get("/topten", async function(req, res, next) {
+  try {
+    const customers = await Customer.getTopTen();
+    return res.render("customer_topTen.html", { customers });
+  } catch (err) {
+    return next(err);
+  }
+});
+
 // Form to add a new customer
 router.get("/add/", async function(req, res, next) {
   try {
@@ -65,6 +75,7 @@ router.get("/:id/edit/", async function(req, res, next) {
     return next(err);
   }
 });
+
 
 // Handle editing a customer
 router.post("/:id/edit/", async function(req, res, next) {
