@@ -60,8 +60,7 @@ class Customer {
     // finding customer objects from id to add to resArr
     for (let i=0; i < resp.rows.length; i++) {
       let customer = await Customer.get(resp.rows[i].customer_id);
-      customer.reservations = await Reservation.getReservationsForCustomer(customer.customer_id);
-      debugger;
+      // customer.reservations = await Reservation.getReservationsForCustomer(customer.customer_id);
       resArr.push(customer);
     }
     return resArr;
